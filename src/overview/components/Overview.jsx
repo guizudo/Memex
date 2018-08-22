@@ -1,39 +1,30 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import { Wrapper } from 'src/common-ui/components'
-import DeleteConfirmModal from './DeleteConfirmModal'
-import Header from './Header'
-import styles from './Overview.css'
-import Head from 'src/options/containers/Head'
-import SideBar from '../sidebar-left/container'
+import Sidebar from '../sidebar'
+import Onboarding from '../onboarding'
+import { DeleteConfirmModal } from '../delete-confirm-modal'
+import {
+    SidebarContainer as SidebarLeft,
+    SidebarIconsContainer as SidebarIcons,
+} from '../sidebar-left'
+import { Header } from '../search-bar'
+import { Results } from '../results'
+import Head from '../../options/containers/Head'
+import { Wrapper } from '../../common-ui/components'
+import DragElement from './DragElement'
 
-const Overview = props => (
+const Overview = () => (
     <Wrapper>
         <Head />
-        <Header {...props} />
-
-        {props.sidebarIcons}
-        <SideBar disableOnClickOutside={props.disbleOutsideClick} />
-
-        <div className={styles.main}>{props.children}</div>
-        <DeleteConfirmModal
-            isShown={props.isDeleteConfShown}
-            onClose={props.resetDeleteConfirm}
-            deleteDocs={props.deleteDocs}
-        />
-        {props.renderDragElement}
+        <Header />
+        <SidebarIcons />
+        <SidebarLeft />
+        <Results />
+        <DeleteConfirmModal />
+        <DragElement />
+        <Sidebar />
+        <Onboarding />
     </Wrapper>
 )
-
-Overview.propTypes = {
-    children: PropTypes.node.isRequired,
-    isDeleteConfShown: PropTypes.bool.isRequired,
-    resetDeleteConfirm: PropTypes.func.isRequired,
-    deleteDocs: PropTypes.func.isRequired,
-    renderDragElement: PropTypes.node.isRequired,
-    sidebarIcons: PropTypes.node,
-    disbleOutsideClick: PropTypes.bool.isRequired,
-}
 
 export default Overview
